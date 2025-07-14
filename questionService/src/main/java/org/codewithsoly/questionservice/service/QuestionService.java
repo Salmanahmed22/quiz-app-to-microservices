@@ -1,6 +1,8 @@
 package org.codewithsoly.questionservice.service;
 
 
+import org.codewithsoly.questionservice.model.QuestionWrapper;
+import org.codewithsoly.questionservice.model.Response;
 import org.codewithsoly.questionservice.repos.QuestionRepo;
 import org.codewithsoly.questionservice.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +43,37 @@ public class QuestionService {
     }
 
     public ResponseEntity<List<Integer>> generateQuizQuestions(int numOfQuestions, String category) {
-        List<Question> questions = questionRepo.findRandomQuestionsByCategory(category,numOfQuestions);
-        List<Integer> questionIds = new ArrayList<>();
-        for (Question question : questions) {
-            questionIds.add(question.getId());
-        }
+        List<Integer> questionIds = questionRepo.findRandomQuestionsByCategory(category,numOfQuestions);
         return new ResponseEntity<>(questionIds,HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(List<Integer> questionIds) {
+        List<Question> questions = questionRepo.findAllById(questionIds);
+        List<QuestionWrapper> questionWrappers = new ArrayList<>();
+        for (Question question : questions) {
+            QuestionWrapper questionWrapper = new QuestionWrapper();
+            questionWrapper.setId(question.getId());
+            questionWrapper.setQuestionTitle(question.getQuestionTitle());
+            questionWrapper.setQuestionTitle(question.getQuestionTitle());
+            questionWrapper.setOption1(question.getOption1());
+            questionWrapper.setOption2(question.getOption2());
+            questionWrapper.setOption3(question.getOption3());
+            questionWrapper.setOption4(question.getOption4());
+            questionWrappers.add(questionWrapper);
+        }
+        return new ResponseEntity<>(questionWrappers,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getScore(List<Response> responses) {
+        List<Question> questions = new ArrayList<>();
+        Integer score = 0;
+        for (Response response : responses) {
+            Question question = questionRepo.findById(response.getQuestionId()).get();
+            questions.add(question);
+            if (question.getRightAnswer().equals(response.getResponse())){
+                score++;
+            }
+        }
+        return new ResponseEntity<>(score,HttpStatus.OK);
     }
 }

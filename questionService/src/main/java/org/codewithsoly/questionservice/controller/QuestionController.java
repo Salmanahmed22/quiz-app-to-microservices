@@ -2,6 +2,8 @@ package org.codewithsoly.questionservice.controller;
 
 
 import org.codewithsoly.questionservice.model.Question;
+import org.codewithsoly.questionservice.model.QuestionWrapper;
+import org.codewithsoly.questionservice.model.Response;
 import org.codewithsoly.questionservice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +39,14 @@ public class QuestionController {
         return questionService.generateQuizQuestions(numOfQuestions, category);
     }
 
+    @PostMapping("getQuizQuestions")
+    public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@RequestBody List<Integer> questionIds){
+        return questionService.getQuizQuestions(questionIds);
+    }
+
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return questionService.getScore(responses);
+    }
 
 }
