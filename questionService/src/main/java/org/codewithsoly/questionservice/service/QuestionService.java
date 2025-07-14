@@ -1,7 +1,7 @@
 package org.codewithsoly.questionservice.service;
 
 
-import org.codewithsoly.questionservice.repos.QuestionDao;
+import org.codewithsoly.questionservice.repos.QuestionRepo;
 import org.codewithsoly.questionservice.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class QuestionService {
     @Autowired
-    QuestionDao questionDao;
+    QuestionRepo questionRepo;
 
     public ResponseEntity<List<Question>> getAllQuestions() {
         try {
-            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(questionRepo.findAll(), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class QuestionService {
 
     public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
         try {
-            return new ResponseEntity<>(questionDao.findByCategory(category),HttpStatus.OK);
+            return new ResponseEntity<>(questionRepo.findByCategory(category),HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -36,7 +36,16 @@ public class QuestionService {
     }
 
     public ResponseEntity<String> addQuestion(Question question) {
-        questionDao.save(question);
+        questionRepo.save(question);
         return new ResponseEntity<>("success",HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<List<Integer>> generateQuizQuestions(int numOfQuestions, String category) {
+        List<Question> questions = questionRepo.findRandomQuestionsByCategory(category,numOfQuestions);
+        List<Integer> questionIds = new ArrayList<>();
+        for (Question question : questions) {
+            questionIds.add(question.getId());
+        }
+        return new ResponseEntity<>(questionIds,HttpStatus.OK);
     }
 }
