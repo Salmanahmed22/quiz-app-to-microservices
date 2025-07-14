@@ -1,10 +1,14 @@
 package org.codewithsoly.questionservice.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Data
 @RequiredArgsConstructor
+@Getter
+@Setter
 public class Response {
     private Integer questionId;
     private String response;
