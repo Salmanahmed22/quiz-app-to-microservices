@@ -1,0 +1,29 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+GET localhost:8080/question/allQuestions
+
+###
+POST localhost:8080/question/add
+Content-Type: application/json
+
+{
+  "questionTitle": "Which data structure uses FIFO (First In First Out)?",
+  "option1": "Stack",
+  "option2": "Queue",
+  "option3": "Linked List",
+  "option4": "Tree",
+  "rightAnswer": "Queue",
+  "difficultylevel": "Hard",
+  "category": "Computer Science"
+}
+
+###
+POST localhost:8080/question/getQuizQuestions
+Content-Type: application/json
+
+[1,2,3]
+
+
