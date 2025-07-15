@@ -11,3 +11,6 @@ Content-Type: application/json
   "title": "Intro to CS Quiz",
   "numberOfQuestions": 5
 }
+
+###
+GET localhost:8090/quiz/get/1
