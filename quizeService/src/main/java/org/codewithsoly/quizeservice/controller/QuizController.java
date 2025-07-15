@@ -22,6 +22,7 @@ public class QuizController {
     public ResponseEntity<String> createQuiz(@RequestBody QuizDto quizDto){
         return quizService.createQuiz(quizDto.getCategory(), quizDto.getNumberOfQuestions(), quizDto.getTitle());
     }
+    //get specific quiz questions
     @GetMapping("get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id){
         return quizService.getQuizQuestions(id);

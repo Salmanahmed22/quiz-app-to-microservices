@@ -10,13 +10,13 @@ POST localhost:8080/question/add
 Content-Type: application/json
 
 {
-  "questionTitle": "Which data structure uses FIFO (First In First Out)?",
-  "option1": "Stack",
-  "option2": "Queue",
-  "option3": "Linked List",
-  "option4": "Tree",
-  "rightAnswer": "Queue",
-  "difficultylevel": "Hard",
+  "questionTitle": "Which of the following is NOT a relational database?",
+  "option1": "MySQL",
+  "option2": "PostgreSQL",
+  "option3": "MongoDB",
+  "option4": "Oracle",
+  "rightAnswer": "MongoDB",
+  "difficultylevel": "Medium",
   "category": "Computer Science"
 }
 

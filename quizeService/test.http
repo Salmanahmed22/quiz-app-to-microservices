@@ -1,0 +1,13 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+POST localhost:8090/quiz/create
+Content-Type: application/json
+
+{
+  "category": "Computer Science",
+  "title": "Intro to CS Quiz",
+  "numberOfQuestions": 5
+}

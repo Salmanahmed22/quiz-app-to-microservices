@@ -35,7 +35,7 @@ public class QuestionController {
 
     @GetMapping("generateQuizQuestions")
     public ResponseEntity<List<Integer>> generateQuizQuestions(
-            @RequestParam int numOfQuestions, String category){
+            @RequestParam int numOfQuestions, @RequestParam String category){
         return questionService.generateQuizQuestions(numOfQuestions, category);
     }
 
