@@ -65,11 +65,9 @@ public class QuestionService {
     }
 
     public ResponseEntity<Integer> getScore(List<Response> responses) {
-        List<Question> questions = new ArrayList<>();
         Integer score = 0;
         for (Response response : responses) {
             Question question = questionRepo.findById(response.getQuestionId()).get();
-            questions.add(question);
             if (question.getRightAnswer().equals(response.getResponse())){
                 score++;
             }

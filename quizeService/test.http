@@ -14,3 +14,30 @@ Content-Type: application/json
 
 ###
 GET localhost:8090/quiz/get/1
+
+###
+POST localhost:8090/quiz/submit/1
+Content-Type: application/json
+
+[
+  {
+    "questionId": 5,
+    "response": "Central Processing Unit"
+  },
+  {
+    "questionId": 6,
+    "response": "Stack"
+  },
+  {
+    "questionId": 7,
+    "response": "O(log n)"
+  },
+  {
+    "questionId": 8,
+    "response": "Object-Oriented"
+  },
+  {
+    "questionId": 9,
+    "response": "MongoDB"
+  }
+]
